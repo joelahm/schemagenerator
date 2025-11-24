@@ -57,7 +57,7 @@ const SchemaGenerator = () => {
     };
 
     if (isPractitioner) {
-      schema["@type"] = "Person";
+      schema["@type"] = "Physician";
       schema.name = data.name;
       schema.honorificSuffix = data.honorificSuffix;
       schema.jobTitle = data.jobTitle;
