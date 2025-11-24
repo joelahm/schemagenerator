@@ -64,7 +64,6 @@ const SchemaGenerator = () => {
       schema.url = data.url;
       schema.telephone = data.telephone;
       schema.sameAs = data.sameAs;
-      schema.medicalSpecialty = data.medicalSpecialty;
 
       if (isMultiple) {
         // Multiple locations - all share the same services
@@ -133,10 +132,8 @@ const SchemaGenerator = () => {
       }
 
     } else {
-      // Clinic - Use selected clinic types or default
-      schema["@type"] = data.clinicTypes && data.clinicTypes.length > 0 
-        ? (data.clinicTypes.length === 1 ? data.clinicTypes[0] : data.clinicTypes)
-        : ["Physician", "MedicalClinic"];
+      // Clinic - Always use Physician and MedicalClinic
+      schema["@type"] = ["Physician", "MedicalClinic"];
       schema.name = data.name;
       schema.description = data.description;
       schema.url = data.url;
@@ -147,7 +144,6 @@ const SchemaGenerator = () => {
       schema.image = data.image;
       schema.hasMap = data.hasMap;
       schema.sameAs = data.sameAs;
-      schema.medicalSpecialty = data.medicalSpecialty;
 
       if (!isMultiple) {
         // Single clinic
@@ -214,16 +210,8 @@ const SchemaGenerator = () => {
 
         // Only include subOrganization if there are additional locations
         schema.subOrganization = data.subOrganizations?.map((org: any) => {
-          // Handle type - if multiple types, use array; if single, use string
-          let orgType;
-          if (org.type && org.type.length > 0) {
-            orgType = org.type.length === 1 ? org.type[0] : org.type;
-          } else {
-            orgType = ["Physician", "MedicalClinic"]; // Default
-          }
-          
           return {
-            "@type": orgType,
+            "@type": ["Physician", "MedicalClinic"],
             name: org.name,
             hasMap: org.hasMap,
             address: {
