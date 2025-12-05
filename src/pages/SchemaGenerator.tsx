@@ -144,6 +144,7 @@ const SchemaGenerator = () => {
       schema.image = data.image;
       schema.hasMap = data.hasMap;
       schema.sameAs = data.sameAs;
+      schema.medicalSpecialty = data.medicalSpecialty;
 
       if (!isMultiple) {
         // Single clinic
@@ -208,6 +209,12 @@ const SchemaGenerator = () => {
           name: s
         }));
 
+        schema.aggregateRating = data.ratingValue ? {
+          "@type": "AggregateRating",
+          ratingValue: parseFloat(data.ratingValue),
+          reviewCount: parseInt(data.reviewCount) || 0
+        } : undefined;
+
         // Only include subOrganization if there are additional locations
         schema.subOrganization = data.subOrganizations?.map((org: any) => {
           return {
@@ -235,12 +242,6 @@ const SchemaGenerator = () => {
             }))
           };
         });
-
-        schema.aggregateRating = data.ratingValue ? {
-          "@type": "AggregateRating",
-          ratingValue: parseFloat(data.ratingValue),
-          reviewCount: parseInt(data.reviewCount) || 0
-        } : undefined;
       }
     }
 

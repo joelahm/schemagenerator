@@ -85,6 +85,7 @@ const SchemaForm = ({ entityType, locationType, onDataChange }: SchemaFormProps)
       // Clinic
       initialData.clinicTypes = ['Private Healthcare']; // Default type
       initialData.isCustomClinicName = false;
+      initialData.medicalSpecialty = [];
       initialData.description = '';
       initialData.email = '';
       initialData.priceRange = '';
@@ -700,6 +701,114 @@ const SchemaForm = ({ entityType, locationType, onDataChange }: SchemaFormProps)
                       placeholder="Enter custom clinic name"
                     />
                   )}
+                </div>
+              </div>
+
+              <div>
+                <Label>Medical Specialty *</Label>
+                <div className="space-y-2">
+                  <div className="flex gap-2 flex-wrap">
+                    {(formData.medicalSpecialty || []).map((spec: string, index: number) => (
+                      <Badge key={index} variant="secondary" className="px-3 py-1">
+                        {spec}
+                        <button
+                          onClick={() => {
+                            updateField(
+                              'medicalSpecialty',
+                              (formData.medicalSpecialty || []).filter((_: string, i: number) => i !== index)
+                            );
+                          }}
+                          className="ml-2 text-destructive hover:text-destructive/80"
+                          type="button"
+                        >
+                          ×
+                        </button>
+                      </Badge>
+                    ))}
+                  </div>
+
+                  <select
+                    className="w-full border rounded-md p-2"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (value && !(formData.medicalSpecialty || []).includes(value)) {
+                        updateField('medicalSpecialty', [...(formData.medicalSpecialty || []), value]);
+                      }
+                      e.target.value = '';
+                    }}
+                  >
+                    <option value="">Select medical specialty...</option>
+                    <option value="PrimaryCare">Primary Care</option>
+                    <option value="FamilyMedicine">Family Medicine</option>
+                    <option value="GeneralPractice">General Practice</option>
+                    <option value="InternalMedicine">Internal Medicine</option>
+
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="CosmeticSurgery">Cosmetic Surgery</option>
+                    <option value="PlasticSurgery">Plastic Surgery</option>
+                    <option value="AestheticMedicine">Aesthetic Medicine</option>
+
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Endocrinology">Endocrinology</option>
+                    <option value="Gastroenterology">Gastroenterology</option>
+                    <option value="Hematology">Hematology</option>
+                    <option value="Nephrology">Nephrology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Oncology">Oncology</option>
+                    <option value="Psychiatry">Psychiatry</option>
+                    <option value="Pulmonology">Pulmonology</option>
+                    <option value="Rheumatology">Rheumatology</option>
+                    <option value="InfectiousDisease">Infectious Disease</option>
+                    <option value="Immunology">Immunology</option>
+                    <option value="AllergyImmunology">Allergy & Immunology</option>
+
+                    <option value="Obstetrics">Obstetrics</option>
+                    <option value="Gynecology">Gynecology</option>
+                    <option value="ReproductiveMedicine">Reproductive Medicine</option>
+                    <option value="FertilityMedicine">Fertility Medicine</option>
+
+                    <option value="Pediatrics">Pediatrics</option>
+
+                    <option value="Dentistry">Dentistry</option>
+                    <option value="OralSurgery">Oral Surgery</option>
+                    <option value="Orthodontics">Orthodontics</option>
+                    <option value="Periodontics">Periodontics</option>
+                    <option value="Prosthodontics">Prosthodontics</option>
+                    <option value="Endodontics">Endodontics</option>
+
+                    <option value="Ophthalmology">Ophthalmology</option>
+                    <option value="Optometry">Optometry</option>
+
+                    <option value="Otorhinolaryngology">ENT (Otorhinolaryngology)</option>
+
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="SportsMedicine">Sports Medicine</option>
+                    <option value="PhysicalTherapy">Physical Therapy</option>
+                    <option value="Chiropractic">Chiropractic</option>
+
+                    <option value="DermatologicSurgery">Dermatologic Surgery</option>
+                    <option value="HairRestoration">Hair Restoration</option>
+                    <option value="CosmeticDermatology">Cosmetic Dermatology</option>
+
+                    <option value="Radiology">Radiology</option>
+                    <option value="DiagnosticImaging">Diagnostic Imaging</option>
+                    <option value="Pathology">Pathology</option>
+                    <option value="LaboratoryMedicine">Laboratory Medicine</option>
+
+                    <option value="EmergencyMedicine">Emergency Medicine</option>
+                    <option value="CriticalCare">Critical Care</option>
+                    <option value="Anesthesiology">Anesthesiology</option>
+
+                    <option value="Podiatry">Podiatry</option>
+                    <option value="PainManagement">Pain Management</option>
+                    <option value="SleepMedicine">Sleep Medicine</option>
+                    <option value="OccupationalMedicine">Occupational Medicine</option>
+                    <option value="Geriatrics">Geriatrics</option>
+                  </select>
+
+                  <p className="text-sm text-muted-foreground">
+                    Selected {(formData.medicalSpecialty?.length || 0)} specialty(s) - Select at least one
+                  </p>
                 </div>
               </div>
             </>
