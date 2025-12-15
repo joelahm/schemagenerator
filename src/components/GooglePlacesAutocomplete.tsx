@@ -18,7 +18,8 @@ const GooglePlacesAutocomplete = ({
   onPlaceSelect, 
   placeholder = "Enter address", 
   label = "Address", 
-  apiKey = 'AIzaSyB1SiZWgwVib7DCqkCHPFDySwewiOi4GgQ',
+  //apiKey = 'AIzaSyB1SiZWgwVib7DCqkCHPFDySwewiOi4GgQ',
+  apiKey = 'AIzaSyA8pdQ7GAaJWaH7ZY7t_OFlRQ8liwO3AUA',
   enableBusinessSearch = false 
 }) => {
   const inputRef = useRef(null);
@@ -29,7 +30,8 @@ const GooglePlacesAutocomplete = ({
   const lastProcessedPlaceId = useRef(null);
 
   // Always use hardcoded API key
-  const HARDCODED_API_KEY = 'AIzaSyB1SiZWgwVib7DCqkCHPFDySwewiOi4GgQ';
+  //const HARDCODED_API_KEY = 'AIzaSyB1SiZWgwVib7DCqkCHPFDySwewiOi4GgQ';
+  const HARDCODED_API_KEY = 'AIzaSyA8pdQ7GAaJWaH7ZY7t_OFlRQ8liwO3AUA';
 
   useEffect(() => {
     const loadGoogleMaps = async () => {
